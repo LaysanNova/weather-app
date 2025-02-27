@@ -1,0 +1,19 @@
+npm init -y
+npm install --save express
+
+add on 6 line package.json
+"type": "module",
+
+npm install --save-dev nodemon
+
+line =>"test": "echo \"Error: no test specified\" && exit 1", - delete
+put => "start": "nodemon server.js"
+
+
+
+
+
+
+
+
+npm install --save-dev @types/node
