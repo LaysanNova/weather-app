@@ -45,7 +45,6 @@ function displayWeatherInfo(data){
         const maxDisplay= `${maxTemps[index]}℃`;
         const weatherEmoji = getWeatherEmoji(weatherCode[index])
 
-        debugger
 
         const row = document.createElement('tr');
 
