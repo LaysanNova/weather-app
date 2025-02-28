@@ -1,54 +1,93 @@
-
 const appName = document.getElementById('appName');
+const formInput = document.getElementById('form-input');
+
 const searchBtn = document.getElementById('searchBtn');
-const cityName = document.getElementById('cityName');
-const dayList = document.getElementById('dayList');
+const cityInput = document.getElementById('city-input');
+const card = document.querySelector(".card");
 
-// const dataAPI = {
-//     "latitude": 52.52,
-//     "longitude": 13.419998,
-//     "generationtime_ms": 0.03826618194580078,
-//     "utc_offset_seconds": 0,
-//     "timezone": "GMT",
-//     "timezone_abbreviation": "GMT",
-//     "elevation": 38,
-//     "daily_units": {
-//         "time": "iso8601",
-//         "temperature_2m_max": "°C",
-//         "temperature_2m_min": "°C"
-//     },
-//     "daily": {
-//         "time": [
-//             "2025-02-27",
-//             "2025-02-28",
-//             "2025-03-01",
-//             "2025-03-02",
-//             "2025-03-03",
-//             "2025-03-04",
-//             "2025-03-05"
-//         ],
-//         "temperature_2m_max": [
-//             9,
-//             7.4,
-//             6.3,
-//             4.3,
-//             7.2,
-//             9.4,
-//             11
-//         ],
-//         "temperature_2m_min": [
-//             5.5,
-//             3.1,
-//             0.4,
-//             -1.4,
-//             1.1,
-//             -0.4,
-//             -0.5
-//         ]
-//     }
-// }
+let firstCol = document.querySelectorAll('tr th:first-child, tr td:first-child')
+for (let i = 0; i < firstCol.length; i++) {
+    firstCol[i].style.textAlign = 'left'
+}
 
-const dataAPI = getForecast();
+
+async function getWeatherData(city) {
+    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,weather_code`
+    const response = await fetch(apiUrl);
+
+    if(!response.ok) {
+        throw new Error('Could not fetch weather data!');
+    }
+
+    return await response.json();
+}
+
+
+function displayWeatherInfo(data){
+
+    const {
+        latitude,
+        longitude,
+        timezone,
+        daily: {
+            time: dates,
+            temperature_2m_max: maxTemps,
+            temperature_2m_min: minTemps,
+            weather_code: weatherCode,
+        }
+    } = data;
+
+    card.textContent = "";
+    card.style.display = 'flex';
+
+    dates.forEach((day, index) => {
+        const minDisplay = `${minTemps[index]}℃`;
+        const maxDisplay= `${maxTemps[index]}℃`;
+        const weatherEmoji = getWeatherEmoji(weatherCode[index])
+
+        debugger
+
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${day}</td>
+            <td>${minDisplay}</td>
+            <td>${maxDisplay}</td>  
+            <td>${weatherEmoji}</td>          
+        `
+        card.appendChild(row)
+    });
+}
+
+function getWeatherEmoji(weatherId){
+
+    switch (true){
+        case weatherId >= 200 && weatherId < 300:
+            return "⛈️";
+        case weatherId >= 300 && weatherId < 400:
+            return "🌦️";
+        case weatherId >= 500 && weatherId < 600:
+            return "🌧️";
+        case weatherId >= 600 && weatherId < 700:
+            return "🌨️";
+        case weatherId >= 700 && weatherId < 800:
+            return "🌫️";
+        case weatherId === 800:
+            return "🌞";
+        default:
+        return "";
+    }
+}
+
+function displayError(massage) {
+    const errorDisplay = document.createElement("p")
+    errorDisplay.textContent = massage;
+    errorDisplay.classList.add('errorDisplay');
+
+    card.textContent = "";
+    card.style.display = "flex";
+    card.appendChild(errorDisplay);
+}
 
 class UI {
     static async displayAppName() {
@@ -56,29 +95,29 @@ class UI {
     }
 
     static activateSearchButton() {
-        const isCityValid = cityName.value.trim().length > 0;
+        const isCityValid = cityInput.value.trim().length > 0;
         searchBtn.disabled = !isCityValid;
     }
 
     static displayDays() {
-        const days = Utils.convertDataFormat(dataAPI["daily"]);
-
-        days.forEach(day => {
-            console.log(day);
-            UI.addDayToList(day);
-        });
+        // const days = Utils.convertDataFormat(dataAPI["daily"]);
+        //
+        // days.forEach(day => {
+        //     console.log(day);
+        //     UI.addDayToList(day);
+        // });
     }
 
     static addDayToList(day) {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${day.day}</td>
-            <td>${day.date}</td>
-            <td>${day.min_temp}</td>
-            <td>${day.max_temp}</td>
-        `
-        dayList.appendChild(row)
+        // const row = document.createElement('tr');
+        //
+        // row.innerHTML = `
+        //     <td>${day.day}</td>
+        //     <td>${day.date}</td>
+        //     <td>${day.min_temp}</td>
+        //     <td>${day.max_temp}</td>
+        // `
+        // dayList.appendChild(row)
     }
 }
 
@@ -101,27 +140,20 @@ class API_Service {
 
 }
 
-class Utils {
-    static convertDataFormat(data) {
-        let formattedData = [];
-        for (let i = 0; i < data.time.length; i++) {
-
-            let weekDay = new Date(data.time[i]).toLocaleDateString('en-US',{weekday: 'long'});
-            let todayString = new Date().toISOString().split('T')[0];
-
-            formattedData.push({
-                date: data.time[i],
-                day: data.time[i] === todayString ? "Today" : weekDay,
-                min_temp: data.temperature_2m_min[i],
-                max_temp: data.temperature_2m_max[i],
-            });
-        }
-        return formattedData;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', UI.displayAppName);
-cityName.addEventListener('input', UI.activateSearchButton);
-document.addEventListener('DOMContentLoaded', UI.displayDays);
-
-
+formInput.addEventListener('input', UI.activateSearchButton);
+formInput.addEventListener('submit', async event => {
+    event.preventDefault();
+    const city = cityInput.value;
+    if (city) {
+        try {
+            const weatherData = await getWeatherData(city);
+            displayWeatherInfo(weatherData);
+        } catch (error) {
+            console.error(error);
+            displayError(error);
+        }
+    } else {
+        displayError("Please enter city");
+    }
+});

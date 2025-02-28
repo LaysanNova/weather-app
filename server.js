@@ -4,7 +4,7 @@ import usersRoutes from './routes/forecast.js';
 import path from 'path'
 
 const app = express();
-const PORT = 5001;
+const PORT = 5000;
 
 let staticPath = path.join(path.resolve(), 'public');
 
