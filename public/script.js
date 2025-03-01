@@ -1,5 +1,5 @@
 const appName = document.getElementById('appName');
-const formInput = document.getElementById('form-input');
+const formInput = document.querySelector('.form-input');
 
 const searchBtn = document.getElementById('searchBtn');
 const cityInput = document.getElementById('city-input');

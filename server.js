@@ -16,10 +16,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join('public', 'index.html'));
 })
 
+app.get('/location', (req, res) => {
+    res.sendFile(path.join('public', 'index.html'));
+})
+
 app.get('/api/', (req, res) => {
     console.info(`Get request to endpoint '/' received.`);
-
-    res.send('5-days Weather Forecast API');
+    res.send('5 day Weather Forecast API');
 })
 
 app.listen(PORT, () => console.info(`Server is running on http://localhost:${PORT}`));

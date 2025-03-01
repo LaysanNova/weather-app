@@ -15,15 +15,14 @@
 <div class="container">
     <ul class="nav nav-tabs d-flex justify-content-center" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">City</a>
+            <a class="nav-link active" aria-current="page" href="/">City</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Location</a>
+            <a class="nav-link" href="/location">Location</a>
         </li>
     </ul>
 </div>
-<div class="container">
-    <form class="border border-secondary" id="form-input">
+    <form class="form-input container">
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter city ..." id="city-input">
         </div>
@@ -33,10 +32,7 @@
             </button>
         </div>
     </form>
-</div>
-<div class="container">
-    <p>5-day forecast</p>
-    <div class="card">
+    <div class="container card">
     <table style="display: none;" id="forecast">
         <tbody>
 
@@ -45,7 +41,6 @@
 
     </table>
     </div>
-</div>
 <script src="script.js"></script>
 </body>
 </html>

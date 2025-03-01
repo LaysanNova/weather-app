@@ -1,17 +1,23 @@
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    background-color: hsl(215, 65%, 84%);) ;
+    font-family: 'Great Vibes', cursive;
+    background-color: hsl(206, 30%, 55%);) ;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
+h1 {
+    color: hsl(208, 54%, 21%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 2em;
+}
+
 .card {
-    font-family: Lato,sans-serif;
     display: grid;
-    background: linear-gradient(180deg, hsl(40, 63%, 51%), hsl(212, 84%, 67%));
+    background: linear-gradient(180deg, hsl(40, 89%, 44%), hsl(212, 84%, 67%));
     text-transform: capitalize;
     border-radius: 10px;
 
@@ -29,28 +35,33 @@ button {
     font-weight: bold;
     font-size: 1rem;
     background-color: hsl(215, 93%, 49%);
-    color: #e3effc;
+    color: #b0bed1;
     border: none;
     border-radius: 10px;
     cursor: pointer;
 }
 
 button:hover {
-    border: 1px solid #0099cc;
+    border: 1px solid #0eb6ea;
     background-color: hsl(215, 93%, 39%);
 }
 
 button:disabled,
 button[disabled]{
     border: 1px solid #cdcdcb;
-    background-color: #cccccc;
+    background-color: #84a2ae;
     color: #666666;
 }
 
+.form-input {
+    background: linear-gradient(180deg, hsl(212, 87%, 66%), hsl(189, 20%, 66%));
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+}
 
 .container {
-    margin-top: 10px;
+    margin: 5px;
     width: 30%;
+    padding-bottom: 15px
 }
 
 .errorDisplay {
