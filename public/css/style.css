@@ -24,8 +24,32 @@ body {
     }
 }
 
+button {
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: hsl(215, 93%, 49%);
+    color: #e3effc;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid #0099cc;
+    background-color: hsl(215, 93%, 39%);
+}
+
+button:disabled,
+button[disabled]{
+    border: 1px solid #cdcdcb;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+
 .container {
-    margin-top: 15px;
+    margin-top: 10px;
     width: 30%;
 }
 
