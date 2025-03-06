@@ -1,14 +1,13 @@
-import {getCityName, getCoordinates} from "./input.handler.js";
+import {getCityName, getCoordinates, getPositionDesc, isCityTab} from "./input.handler.js";
 import {WEATHER_CODE} from "../data/weather.code.js";
 import getWeatherData from "./weather.api.js";
 
 
 const card = document.querySelector(".card");
 
-export async function handleSubmit(event) {
+export async function handleSubmit(event, activeTabNumber) {
     event.preventDefault();
-
-    const coordinates = getCoordinates(getCityName());
+    const coordinates = getCoordinates();
     if (coordinates) {
         try {
             const weatherData = await getWeatherData(coordinates);
@@ -17,10 +16,10 @@ export async function handleSubmit(event) {
             console.error(error);
             displayError(error);
         }
-    } else if (!coordinates) {
+    } else if (isCityTab()) {
         displayError("City is not found. Try enter coordinates.");
     } else {
-        displayError("Please enter city");
+        displayError("Please enter valid coordinates.");
     }
 }
 
@@ -36,7 +35,13 @@ function displayError(message) {
 
 function addTableToCard() {
     const cityDisplay = document.createElement("p");
-    cityDisplay.textContent = getCityName();
+
+    if (isCityTab()) {
+        cityDisplay.textContent = getCityName();
+    } else {
+        cityDisplay.textContent = getPositionDesc();
+    }
+
     card.appendChild(cityDisplay);
 
     const table = document.createElement("table");

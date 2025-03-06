@@ -8,4 +8,7 @@ export const cities = {
     "london":{
         "latitude": "51.509865",
         "longitude": "-0.118092" },
+    "grand junction":{
+        "latitude": "38.9585",
+        "longitude": "108.6176" },
 }

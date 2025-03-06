@@ -3,42 +3,56 @@ import {cities} from "../data/cities.data.js";
 
 const searchBtn = document.getElementById('searchBtn');
 const cityInput = document.getElementById('city-input');
-const latitude = document.getElementById('lat-input');
-const longitude = document.getElementById('long-input');
+const latitudeInput = document.getElementById('lat-input');
+const longitudeInput = document.getElementById('long-input');
+const tab1 = document.getElementById('tab1')
 
 const handleInputChange = {
-    handleCityInput : function () {
 
-        function activateSearchButton() {
-            const isCityValid = getCityName().length > 0;
-            searchBtn.disabled = !isCityValid;
-        }
-        cityInput.addEventListener('input', activateSearchButton);
+    handleCityInput: function () {
+        cityInput.addEventListener('input', () => activateButton([cityInput]));
     },
 
-    handleLatLongInput : function () {
+    handleLatLongInput: function () {
+        latitudeInput.addEventListener('input', () => activateButton([latitudeInput, longitudeInput]));
+        longitudeInput.addEventListener('input', () => activateButton([latitudeInput, longitudeInput]));
+    },
 
-        function activateSearchButton() {
-            searchBtn.disabled = !(longitude.value && longitude.value);
-        }
-        latitude.addEventListener('input', activateSearchButton);
-        longitude.addEventListener('input', activateSearchButton);
+    activateButton : function (inputs) {
+        const isValid = inputs.every(input => input.value.trim().length > 0);
+        searchBtn.disabled = !isValid;
     },
 
     checkSubmitButton: function (tabNumber) {
         if (tabNumber === "1") {
-            const isCityValid = getCityName().length > 0;
-            searchBtn.disabled = !isCityValid;
-
+            activateButton([cityInput]);
         } else if (tabNumber === "2") {
-            searchBtn.disabled = !(longitude.value && longitude.value);
+            activateButton([latitudeInput, longitudeInput]);
         }
     },
 
+    isValidLatLongInput : function () {
+        const latitudeValue = parseFloat(latitudeInput.value.trim());
+        const longitudeValue = parseFloat(longitudeInput.value.trim());
+
+        return ((!isNaN(latitudeValue) && latitudeValue >= -90 && latitudeValue <= 90) &&
+            (!isNaN(longitudeValue) && longitudeValue >= -180 && longitudeValue <= 180))
+    },
+
+    isCityTab: function () {
+        return tab1.classList.contains('active');
+    },
+
     getCoordinates : function () {
-        const city = cities[getCityName().toLowerCase()];
-        if (city) {
-            return {"latitude": city["latitude"], "longitude": city["longitude"]};
+        if (isCityTab()) {
+            const city = cities[getCityName().toLowerCase()];
+            if (city) {
+                return {"latitude": city["latitude"], "longitude": city["longitude"]};
+            }
+        } else {
+            if (isValidLatLongInput()) {
+                return {"latitude": latitudeInput.value.trim(), "longitude": longitudeInput.value.trim()};
+            }
         }
 
         return false;
@@ -48,6 +62,12 @@ const handleInputChange = {
         return cityInput.value.trim().toLowerCase()
     },
 
+    getPositionDesc : function () {
+        const latitudeValue = parseFloat(latitudeInput.value.trim());
+        const longitudeValue = parseFloat(longitudeInput.value.trim());
+
+        return `(${latitudeValue}, ${longitudeValue})`;
+    },
 
 }
 
@@ -55,4 +75,8 @@ export const handleCityInput = handleInputChange.handleCityInput;
 export const handleLatLongInput = handleInputChange.handleLatLongInput;
 export const getCoordinates = handleInputChange.getCoordinates;
 export const getCityName = handleInputChange.getCityName;
+export const getPositionDesc = handleInputChange.getPositionDesc;
+export const activateButton = handleInputChange.activateButton;
 export const checkSubmitButton = handleInputChange.checkSubmitButton;
+export const isValidLatLongInput = handleInputChange.isValidLatLongInput;
+export const isCityTab = handleInputChange.isCityTab;

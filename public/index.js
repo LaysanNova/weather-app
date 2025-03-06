@@ -19,17 +19,20 @@ function showTab(tabNumber) {
 
     tabs[tabNumber - 1].classList.add('active');
     inputs[tabNumber - 1].classList.add('active');
+    checkSubmitButton(tabNumber);
 }
 
-document.addEventListener('DOMContentLoaded', displayAppName);
+document.addEventListener('DOMContentLoaded', () => {
+    displayAppName().then(r => checkSubmitButton("1"));
+    handleCityInput()
+    handleLatLongInput();
+});
+
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
         const tabNumber = tab.getAttribute('data-tab');
         showTab(tabNumber);
-        checkSubmitButton(tabNumber);
     });
 });
 
-formInput.addEventListener('input', handleCityInput);
-formInput.addEventListener('input', handleLatLongInput);
 formInput.addEventListener('submit', handleSubmit);
