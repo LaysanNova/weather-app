@@ -1,6 +1,6 @@
 import {API_Service} from "./scripts/api_service.js";
-import {activateGetWeatherButton, checkSubmitButton} from "./scripts/input.handler.js";
 import {handleSubmit} from "./scripts/submit.handler.js";
+import {checkSubmitButton, handleCityInput, handleLatLongInput} from "./scripts/input.handler.js";
 
 
 const appName = document.getElementById('appName');
@@ -26,10 +26,10 @@ document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
         const tabNumber = tab.getAttribute('data-tab');
         showTab(tabNumber);
-
         checkSubmitButton(tabNumber);
     });
 });
 
-formInput.addEventListener('input', activateGetWeatherButton, checkSubmitButton);
+formInput.addEventListener('input', handleCityInput);
+formInput.addEventListener('input', handleLatLongInput);
 formInput.addEventListener('submit', handleSubmit);

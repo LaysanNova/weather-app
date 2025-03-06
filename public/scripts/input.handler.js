@@ -7,14 +7,29 @@ const latitude = document.getElementById('lat-input');
 const longitude = document.getElementById('long-input');
 
 const handleInputChange = {
-    submitAvailability: function () {
+    handleCityInput : function () {
+
+        function activateSearchButton() {
             const isCityValid = getCityName().length > 0;
             searchBtn.disabled = !isCityValid;
+        }
+        cityInput.addEventListener('input', activateSearchButton);
+    },
+
+    handleLatLongInput : function () {
+
+        function activateSearchButton() {
+            searchBtn.disabled = !(longitude.value && longitude.value);
+        }
+        latitude.addEventListener('input', activateSearchButton);
+        longitude.addEventListener('input', activateSearchButton);
     },
 
     checkSubmitButton: function (tabNumber) {
         if (tabNumber === "1") {
-            activateGetWeatherButton();
+            const isCityValid = getCityName().length > 0;
+            searchBtn.disabled = !isCityValid;
+
         } else if (tabNumber === "2") {
             searchBtn.disabled = !(longitude.value && longitude.value);
         }
@@ -36,7 +51,8 @@ const handleInputChange = {
 
 }
 
-export const activateGetWeatherButton = handleInputChange.submitAvailability;
+export const handleCityInput = handleInputChange.handleCityInput;
+export const handleLatLongInput = handleInputChange.handleLatLongInput;
 export const getCoordinates = handleInputChange.getCoordinates;
 export const getCityName = handleInputChange.getCityName;
 export const checkSubmitButton = handleInputChange.checkSubmitButton;
