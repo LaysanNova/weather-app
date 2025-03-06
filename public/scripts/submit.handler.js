@@ -65,6 +65,19 @@ function displayWeatherInfo(data) {
         }
     } = data;
 
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in 'YYYY-MM-DD' format
+
+    const weekdays = dates.map(dateString => {
+        const date = new Date(dateString);
+        const formattedDate = date.toISOString().split('T')[0];
+
+        if (formattedDate === today) {
+            return "TODAY";
+        } else {
+            return date.toLocaleDateString('en-US', {weekday: 'long', timeZone: 'UTC' });
+        }
+    });
+
     card.textContent = "";
     card.style.display = "flex";
     addTableToCard();
@@ -73,7 +86,7 @@ function displayWeatherInfo(data) {
     for (let i = 0; i < dates.length; i++) {
         const row = document.createElement('tr');
 
-        [dates[i], weatherCode[i], minTemps[i], maxTemps[i]].forEach((cellData, index) => {
+        [weekdays[i], weatherCode[i], minTemps[i], maxTemps[i]].forEach((cellData, index) => {
             const cell = document.createElement('td');
             if (index === 1) {
                 const weatherImg = document.createElement('img');
