@@ -13,11 +13,11 @@ app.use(express.static('public'));
 app.use('/api/forecast', usersRoutes);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join('public', 'index.html'));
+    res.sendFile(path.join(staticPath, 'index.html'));
 })
 
 app.get('/location', (req, res) => {
-    res.sendFile(path.join('public', 'index.html'));
+    res.sendFile(path.join(staticPath, 'index.html'));
 })
 
 app.get('/api/', (req, res) => {
