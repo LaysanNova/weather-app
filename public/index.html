@@ -18,8 +18,8 @@
             <input type="text" placeholder="Enter city ..." id="city-input">
         </div>
         <div id="tab2" class="inputs">
-            <input type="text" placeholder="Enter latitude ...">
-            <input type="text" placeholder="Enter longitude ...">
+            <input type="text" placeholder="Enter latitude ..." id="lat-input">
+            <input type="text" placeholder="Enter longitude ..."  id="long-input">
         </div>
         <button type="submit" id="searchBtn" disabled role="button">
             <span>Get Weather</span>
@@ -27,95 +27,6 @@
     </form>
 </div>
 <div class="container card" style="display: none">
-    <table class="table">
-        <tbody>
-        </tbody>
-    </table>
 </div>
 <script src="index.js" type="module"></script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Закладки</title>-->
-<!--    <style>-->
-<!--        body {-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--            align-items: center;-->
-<!--            height: 100vh;-->
-<!--            margin: 0;-->
-<!--            font-family: Arial, sans-serif;-->
-<!--        }-->
-<!--        .container {-->
-<!--            text-align: center;-->
-<!--            border: 1px solid #ccc;-->
-<!--            padding: 20px;-->
-<!--            border-radius: 10px;-->
-<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
-<!--        }-->
-<!--        .tabs {-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--            margin-bottom: 20px;-->
-<!--        }-->
-<!--        .tab {-->
-<!--            cursor: pointer;-->
-<!--            padding: 10px 20px;-->
-<!--            border: 1px solid #ccc;-->
-<!--            border-radius: 5px;-->
-<!--            margin: 0 5px;-->
-<!--        }-->
-<!--        .tab.active {-->
-<!--            background-color: #007bff;-->
-<!--            color: #fff;-->
-<!--        }-->
-<!--        .inputs {-->
-<!--            display: none;-->
-<!--        }-->
-<!--        .inputs.active {-->
-<!--            display: block;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container">-->
-<!--    <div class="tabs">-->
-<!--        <div class="tab active" onclick="showTab(1)">Закладка 1</div>-->
-<!--        <div class="tab" onclick="showTab(2)">Закладка 2</div>-->
-<!--    </div>-->
-<!--    <div id="tab1" class="inputs active">-->
-<!--        <input type="text" placeholder="Поле ввода 1">-->
-<!--    </div>-->
-<!--    <div id="tab2" class="inputs">-->
-<!--        <input type="text" placeholder="Поле ввода 2-1">-->
-<!--        <br><br>-->
-<!--        <input type="text" placeholder="Поле ввода 2-2">-->
-<!--    </div>-->
-<!--</div>-->
-<!--<script>-->
-<!--    function showTab(tabNumber) {-->
-<!--        const tabs = document.querySelectorAll('.tab');-->
-<!--        const inputs = document.querySelectorAll('.inputs');-->
-
-<!--        tabs.forEach(tab => tab.classList.remove('active'));-->
-<!--        inputs.forEach(input => input.classList.remove('active'));-->
-
-<!--        document.querySelector(`.tab:nth-child(${tabNumber})`).classList.add('active');-->
-<!--        document.getElementById(`tab${tabNumber}`).classList.add('active');-->
-<!--    }-->
-<!--</script>-->

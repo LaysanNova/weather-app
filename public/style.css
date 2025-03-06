@@ -138,3 +138,9 @@ th:not(:first-child), td:not(:first-child) {
     width: 30px;
     height: 30px;
 }
+
+p {
+    font-size: 2.5rem;
+    margin: 5px 0;
+    text-transform: capitalize;
+}
