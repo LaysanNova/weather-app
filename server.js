@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import usersRoutes from './routes/forecast.js';
 import path from 'path'
 
 const app = express();
@@ -10,13 +9,8 @@ let staticPath = path.join(path.resolve(), 'public');
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use('/api/forecast', usersRoutes);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
-})
-
-app.get('/location', (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
 })
 
