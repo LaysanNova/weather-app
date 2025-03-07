@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/', (req, res) => {
     console.info(`Get request to endpoint '/' received.`);
-    res.send('5 day Weather Forecast API');
+    res.send('5-day Weather Forecast API');
 })
 
 app.get('/api/weather-images', (req, res) => {
