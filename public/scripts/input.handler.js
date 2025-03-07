@@ -1,4 +1,5 @@
-import {cities} from "../data/cities.data.js";
+import {CITIES} from "../data/cities.data.js";
+import capitalizeWords from "./helper.js";
 
 
 const searchBtn = document.getElementById('searchBtn');
@@ -45,13 +46,17 @@ const handleInputChange = {
 
     getCoordinates : function () {
         if (isCityTab()) {
-            const city = cities[getCityName().toLowerCase()];
+
+            const city = CITIES[capitalizeWords(getCityName().toLowerCase())];
             if (city) {
                 return {"latitude": city["latitude"], "longitude": city["longitude"]};
             }
         } else {
             if (isValidLatLongInput()) {
-                return {"latitude": latitudeInput.value.trim(), "longitude": longitudeInput.value.trim()};
+                return {
+                    "latitude": parseFloat(latitudeInput.value.trim()),
+                    "longitude": parseFloat(longitudeInput.value.trim())
+                };
             }
         }
 

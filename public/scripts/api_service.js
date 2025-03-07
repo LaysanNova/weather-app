@@ -1,5 +1,3 @@
-
-
 class API_Service {
     static async getAppName() {
         return fetch("http://localhost:5000/api/")

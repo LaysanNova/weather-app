@@ -72,7 +72,7 @@ function displayWeatherInfo(data) {
         const formattedDate = date.toISOString().split('T')[0];
 
         if (formattedDate === today) {
-            return "TODAY";
+            return "Today";
         } else {
             return date.toLocaleDateString('en-US', {weekday: 'long', timeZone: 'UTC' });
         }
