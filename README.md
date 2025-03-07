@@ -1,7 +1,5 @@
 # Weather-APP
 
-
-
 - Weather-APP is an application that provides a 5-day weather forecast.
 - Users can select a city from the list or set coordinates (longitude and latitude).
 - The application uses the *[Open-Meteo](https://open-meteo.com/en/docs/)* .
